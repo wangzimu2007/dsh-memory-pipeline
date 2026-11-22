@@ -210,10 +210,12 @@ def validate_admission(raw, valid_ids, allowed):
         errs.append("revise needs replacement")
     if dec in {"drop", "hold"} and str(slot.get("replacement") or "").strip():
         errs.append("drop/hold should have empty replacement")
+    if dec in {"pass", "revise"} and not ev:
+        errs.append("pass/revise needs evidence")
     return not errs, errs, (dec or "")
 
 
-def tier_available(name, cfg, wait=True):
+def tier_available(name, cfg, global_cfg, wait=True):
     if name == "cloud":
         env = cfg.get("api_key_env")
         if env and not os.environ.get(env):
@@ -226,7 +228,7 @@ def tier_available(name, cfg, wait=True):
         if cfg.get("kind") == "ollama" and model in get_loaded_ollama_models():
             return True, ""
         if wait:
-            ok, free = wait_for_free_vram(need, cfg, name)
+            ok, free = wait_for_free_vram(need, global_cfg, name)
             if not ok:
                 return False, f"VRAM timeout: free {free}MB < {need}MB"
         else:
@@ -270,7 +272,7 @@ def process_case(case, cfg, start_index):
         if not tier_cfg:
             attempts.append({"tier": tier, "status": "missing_config"})
             continue
-        available, reason = tier_available(tier, tier_cfg)
+        available, reason = tier_available(tier, tier_cfg, cfg)
         if not available:
             attempts.append({"tier": tier, "status": "skipped", "reason": reason})
             continue
