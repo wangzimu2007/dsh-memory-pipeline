@@ -59,6 +59,12 @@ class ValidatorTests(unittest.TestCase):
         ok, errors, _ = mp.validate_admission(raw, {"s0"}, ["revise", "drop"])
         self.assertFalse(ok)
 
+    def test_admission_pass_requires_evidence(self):
+        raw = json.dumps({"0": {"decision": "pass", "evidence": [], "replacement": ""}})
+        ok, errors, _ = mp.validate_admission(raw, {"s0"}, ["pass"])
+        self.assertFalse(ok)
+        self.assertTrue(any("needs evidence" in e for e in errors))
+
 
 if __name__ == "__main__":
     unittest.main()
