@@ -1,0 +1,51 @@
+{
+  "prompts_dir": "./vendor/qwen3.5-4b-memory-v2-main",
+  "tier_order": ["q4", "9b", "27b", "strata", "cloud"],
+  "unload_on_failure": true,
+  "unload_on_finish": true,
+  "vram_wait_timeout_sec": 1800,
+  "vram_poll_sec": 10,
+  "tiers": {
+    "q4": {
+      "kind": "ollama",
+      "base_url": "http://127.0.0.1:11434",
+      "model": "qwen3.5:4b-memory-v2-q4",
+      "num_ctx": 16384,
+      "max_attempts": 2,
+      "min_free_vram_mb": 4000
+    },
+    "9b": {
+      "kind": "ollama",
+      "base_url": "http://127.0.0.1:11434",
+      "model": "huihui_ai/qwen3.5-abliterated:9b",
+      "num_ctx": 16384,
+      "max_attempts": 1,
+      "min_free_vram_mb": 8000
+    },
+    "27b": {
+      "kind": "ollama",
+      "base_url": "http://127.0.0.1:11434",
+      "model": "qwen3.8:27b-abliterated",
+      "num_ctx": 32768,
+      "max_attempts": 1,
+      "min_free_vram_mb": 18000
+    },
+    "strata": {
+      "kind": "openai",
+      "base_url": "http://127.0.0.1:8082/v1",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "api_key_env": "STRATA_API_KEY",
+      "max_attempts": 1,
+      "min_free_vram_mb": 18000
+    },
+    "cloud": {
+      "kind": "openai",
+      "base_url": "https://api.deepseek.com/v1",
+      "base_url_env": "MEMORY_CLOUD_BASE_URL",
+      "model": "deepseek-chat",
+      "model_env": "MEMORY_CLOUD_MODEL",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "max_attempts": 1
+    }
+  }
+}
