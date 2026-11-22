@@ -1,0 +1,70 @@
+[
+  {
+    "id": "extract-api-limit",
+    "task": "extraction",
+    "evidence": [
+      {
+        "id": "s0",
+        "path": ["note"],
+        "text": "2026-03-01 记录：API 网关速率上限将于 2026-03-15 起调整为每分钟 120 次，原上限为每分钟 60 次。"
+      }
+    ]
+  },
+  {
+    "id": "extract-service-location",
+    "task": "extraction",
+    "evidence": [
+      {
+        "id": "s0",
+        "path": ["note"],
+        "text": "本地记忆服务运行在 127.0.0.1:8888，默认 bank 名为 hermes。"
+      }
+    ]
+  },
+  {
+    "id": "admission-faithful",
+    "task": "admission",
+    "evidence": [
+      {
+        "id": "s0",
+        "path": ["note"],
+        "text": "数据库主节点连接池上限设置为 200，只读副本上限为 500。"
+      }
+    ],
+    "fact": {
+      "text": "数据库主节点连接池上限设置为 200。",
+      "type": "world",
+      "occurred_start": null,
+      "occurred_end": null,
+      "where": null,
+      "entities": ["数据库主节点"],
+      "mentioned_at": "2026-05-03T08:00:00Z",
+      "context": "demo",
+      "tags": []
+    },
+    "allowed": ["pass"]
+  },
+  {
+    "id": "admission-wrong-number",
+    "task": "admission",
+    "evidence": [
+      {
+        "id": "s0",
+        "path": ["note"],
+        "text": "数据库主节点连接池上限设置为 200，只读副本上限为 500。"
+      }
+    ],
+    "fact": {
+      "text": "数据库主节点连接池上限设置为 500。",
+      "type": "world",
+      "occurred_start": null,
+      "occurred_end": null,
+      "where": null,
+      "entities": ["数据库主节点"],
+      "mentioned_at": "2026-05-03T08:00:00Z",
+      "context": "demo",
+      "tags": []
+    },
+    "allowed": ["revise", "drop"]
+  }
+]
