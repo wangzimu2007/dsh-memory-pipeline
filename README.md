@@ -2,7 +2,7 @@
 
 [English](README_EN.md) | 简体中文
 
-[![Release v0.1.0](https://img.shields.io/github/v/release/wangzimu2007/dsh-memory-pipeline?include_prereleases&label=release)](https://github.com/wangzimu2007/dsh-memory-pipeline/releases)
+[![Release v0.1.1](https://img.shields.io/github/v/release/wangzimu2007/dsh-memory-pipeline?include_prereleases&label=release)](https://github.com/wangzimu2007/dsh-memory-pipeline/releases)
 
 给 DeepSeek Harness (DSH) 用的分级记忆处理管线：先用小模型，严格校验，只有失败才升级。
 

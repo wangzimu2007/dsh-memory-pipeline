@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.1.1 - 2026-11-23
+
+### Fixed
+
+- `pass` and `revise` admissions now require at least one evidence ID.
+- VRAM waiting now uses the top-level global config instead of a tier's
+  sub-config, so the configured threshold and timeout are actually applied.
+
+### Tests
+
+- Added a validator regression test for `pass` without evidence.
+- All 6 unit tests pass.
+
 ## v0.1.0 - 2026-11-22
 
 Initial public release.
